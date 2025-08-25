@@ -1,10 +1,11 @@
 import Beams from "./blocks/Backgrounds/Beams/Beams";
 import TextType from "./blocks/TextAnimations/TextType/TextType";
+import { SmoothCursor } from "./components/ui/smooth-cursor";
 
 function App() {
   return (
     <>
-      {/* <SmoothCursor /> */}
+      <SmoothCursor />
       <div className="relative h-screen w-screen flex flex-col items-center justify-center pointer-events-none">
         <Beams
           beamWidth={3}
