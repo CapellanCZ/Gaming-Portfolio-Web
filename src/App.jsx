@@ -1,4 +1,5 @@
 import Beams from "./blocks/Backgrounds/Beams/Beams";
+import TextType from "./blocks/TextAnimations/TextType/TextType";
 
 function App() {
   return (
@@ -19,9 +20,14 @@ function App() {
 
         {/* Header Section */}
         <div className="absolute top-50 left-0 right-0 flex flex-col items-center pt-16 pb-8 ">
-          <h1 className="font-figtree text-6xl font-bold text-white mb-4 text-center tracking-tight">
-            Gaming Portfolio
-          </h1>
+          <TextType
+            text={["Gaming Portfolio", "developed by", "BisaCool"]}
+            typingSpeed={75}
+            pauseDuration={1500}
+            showCursor={true}
+            cursorCharacter="_"
+            className="font-figtree text-6xl font-bold text-white mb-4 text-center tracking-tight"
+          />
           <p className="font-figtree font-light text-lg text-white/70 text-center max-w-2xl px-4 tracking-tight leading-relaxed">
             Discover elite gamers, their achievements, and the incredible
             journeys that shaped their gaming careers.
@@ -51,16 +57,20 @@ function App() {
             <button
               type="submit"
               className="relative flex items-center justify-center bg-white/5 border border-white/10 rounded-3xl text-white/70 p-3 ml-1 mr-3 transition-all duration-300 overflow-hidden hover:bg-white/10 hover:border-white/20 hover:text-white active:scale-95 pointer-events-auto cursor-pointer group"
-              style={{ '--stroke-width': '2' }}
-              onMouseEnter={(e) => e.currentTarget.style.setProperty('--stroke-width', '2.5')}
-              onMouseLeave={(e) => e.currentTarget.style.setProperty('--stroke-width', '2')}
+              style={{ "--stroke-width": "2" }}
+              onMouseEnter={(e) =>
+                e.currentTarget.style.setProperty("--stroke-width", "2.5")
+              }
+              onMouseLeave={(e) =>
+                e.currentTarget.style.setProperty("--stroke-width", "2")
+              }
             >
               <svg
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
                 className="w-4 h-4 transition-all duration-300 pointer-events-none"
-                style={{ strokeWidth: 'var(--stroke-width)' }}
+                style={{ strokeWidth: "var(--stroke-width)" }}
               >
                 <line x1="5" y1="12" x2="19" y2="12" />
                 <polyline points="12,5 19,12 12,19" />
