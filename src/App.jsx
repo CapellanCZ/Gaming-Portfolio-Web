@@ -4,6 +4,7 @@ import TextType from "./blocks/TextAnimations/TextType/TextType";
 import { SmoothCursor } from "./components/ui/smooth-cursor";
 import SearchBar from "./SearchBar";
 import Shozune from "./pages/Shozune";
+import Yuna from "./pages/Yuna";
 
 function App() {
   const [currentView, setCurrentView] = useState("home");
@@ -14,6 +15,7 @@ function App() {
   // Available players mapping
   const availablePlayers = {
     "shozune": { name: "Shozune", component: Shozune },
+    "yuna": { name: "Yuna", component: Yuna },
     // Add more players here as you create them
   };
 
