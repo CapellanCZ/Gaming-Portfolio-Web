@@ -1,9 +1,15 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { twMerge } from "tailwind-merge";
-import { FiArrowRight, FiMail, FiMapPin, FiGithub, FiTwitter } from "react-icons/fi";
-import { FaSteam } from 'react-icons/fa6';
-import { SiGamemaker } from 'react-icons/si';
+import {
+  FiArrowRight,
+  FiMail,
+  FiMapPin,
+  FiGithub,
+  FiTwitter,
+} from "react-icons/fi";
+import { FaSteam } from "react-icons/fa6";
+import { SiGamemaker } from "react-icons/si";
 
 const Yuna = () => {
   return (
@@ -68,14 +74,14 @@ const HeaderBlock = () => (
     <h1 className="mb-12 text-4xl font-medium leading-tight">
       Hi, I'm Yuna.{" "}
       <span className="text-zinc-400">
-        I create amazing gaming experiences.
+        I play videos games that challanges my skills & creativity.
       </span>
     </h1>
     <a
       href="#"
       className="flex items-center gap-1 text-red-300 hover:underline"
     >
-      Contact me <FiArrowRight />
+       Let's Play <FiArrowRight />
     </a>
   </Block>
 );
@@ -93,7 +99,11 @@ const SocialsBlock = () => (
         href="#"
         className="grid h-full place-content-center text-3xl text-white"
       >
-        <div className="text-white font-bold">YT</div>
+        <img
+          className="w-15"
+          src="https://cdn2.steamgriddb.com/icon/fb7f07c358989bdf148e4a0c5a87e088/32/256x256.png"
+          alt=""
+        />
       </a>
     </Block>
     <Block
@@ -107,7 +117,11 @@ const SocialsBlock = () => (
         href="#"
         className="grid h-full place-content-center text-3xl text-white"
       >
-        <FiGithub />
+        <img
+          className="w-15"
+          src="https://cdn2.steamgriddb.com/icon/2119b8d43eafcf353e07d7cb5554170b/32/256x256.png"
+          alt=""
+        />
       </a>
     </Block>
     <Block
@@ -121,7 +135,11 @@ const SocialsBlock = () => (
         href="#"
         className="grid h-full place-content-center text-3xl text-black"
       >
-        <div className="text-black font-bold">TT</div>
+        <img
+          className="w-15"
+          src="https://cdn2.steamgriddb.com/icon_thumb/11e162eaa8ae8c204128cb0377fff7ea.png"
+          alt=""
+        />
       </a>
     </Block>
     <Block
@@ -135,7 +153,11 @@ const SocialsBlock = () => (
         href="#"
         className="grid h-full place-content-center text-3xl text-white"
       >
-        <FiTwitter />
+        <img
+          className="w-15"
+          src="https://cdn2.steamgriddb.com/icon/9b8e3691c7140875b5fcc94cfc354c60/32/256x256.png"
+          alt=""
+        />
       </a>
     </Block>
   </>
@@ -144,10 +166,10 @@ const SocialsBlock = () => (
 const AboutBlock = () => (
   <Block className="col-span-12 text-3xl leading-snug">
     <p>
-      My passion is gaming and development.{" "}
+      My name is Catherine Capellan.{" "}
       <span className="text-zinc-400">
-        I specialize in competitive gaming and creating content. 
-        I love exploring new games and sharing my journey with the community.
+        I specialize in competitive gaming and creating content. I love
+        exploring new games and sharing my journey with the community.
       </span>
     </p>
   </Block>
@@ -155,7 +177,7 @@ const AboutBlock = () => (
 
 const LocationBlock = () => (
   <Block className="col-span-12 flex flex-col items-center gap-2 md:col-span-3">
-    <FaSteam className="mt-1 text-3xl" />
+    <FaSteam className="mt-2 text-3xl" />
     <p className="text-center text-lg text-zinc-400">11kyupi</p>
   </Block>
 );
