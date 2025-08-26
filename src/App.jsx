@@ -1,8 +1,55 @@
+import { useState } from "react";
 import Beams from "./blocks/Backgrounds/Beams/Beams";
 import TextType from "./blocks/TextAnimations/TextType/TextType";
 import { SmoothCursor } from "./components/ui/smooth-cursor";
+import SearchBar from "./SearchBar";
+import Shozune from "./pages/Shozune";
 
 function App() {
+  const [currentView, setCurrentView] = useState("home");
+  const [currentPlayer, setCurrentPlayer] = useState(null);
+
+  // Available players mapping
+  const availablePlayers = {
+    "shozune": { name: "Shozune", component: Shozune },
+    // Add more players here as you create them
+  };
+
+  const handleSearch = (searchTerm) => {
+    const normalizedSearch = searchTerm.toLowerCase().trim();
+    
+    if (availablePlayers[normalizedSearch]) {
+      setCurrentPlayer(availablePlayers[normalizedSearch]);
+      setCurrentView("player");
+    } else {
+      // Handle case when player is not found
+      alert(`Player "${searchTerm}" not found. Available players: ${Object.keys(availablePlayers).join(", ")}`);
+    }
+  };
+
+  const handleBackToHome = () => {
+    setCurrentView("home");
+    setCurrentPlayer(null);
+  };
+
+  // Render player profile if viewing a player
+  if (currentView === "player" && currentPlayer) {
+    const PlayerComponent = currentPlayer.component;
+    return (
+      <div>
+        {/* Back button */}
+        <button
+          onClick={handleBackToHome}
+          className="fixed top-4 left-4 z-50 bg-black/50 backdrop-blur-sm border border-white/20 text-white px-4 py-2 rounded-lg hover:bg-black/70 transition-all duration-300"
+        >
+          ← Back to Home
+        </button>
+        <PlayerComponent />
+      </div>
+    );
+  }
+
+  // Render home page
   return (
     <>
       <SmoothCursor />
@@ -35,49 +82,9 @@ function App() {
           </p>
         </div>
 
+        {/* Search Bar */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <form className="relative flex items-center w-full max-w-2xl bg-[#2d2d2d]/80 backdrop-blur-lg border border-white/10 rounded-full p-1 shadow-2xl overflow-hidden transition-all duration-300 hover:-translate-y-0.5 focus-within:-translate-y-0.5 group pointer-events-auto">
-            <span className="flex items-center justify-center px-5 py-4 text-white/60 transition-all duration-300 group-focus-within:text-white pointer-events-none">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                className="w-5 h-5 transition-all duration-300 group-focus-within:stroke-[2.5]"
-              >
-                <circle cx="11" cy="11" r="8" />
-                <path d="M21 21l-4.35-4.35" />
-              </svg>
-            </span>
-            <input
-              type="text"
-              className="flex-1 bg-transparent border-none outline-none text-white/90 text-base font-figtree px-0 py-4 placeholder:text-white/40 transition-colors duration-300 focus:placeholder:text-white/30"
-              placeholder="Search player IGN here..."
-              autoComplete="off"
-            />
-            <span className="mx-2 w-px h-6 bg-white/10 pointer-events-none" />
-            <button
-              type="submit"
-              className="relative flex items-center justify-center bg-white/5 border border-white/10 rounded-3xl text-white/70 p-3 ml-1 mr-3 transition-all duration-300 overflow-hidden hover:bg-white/10 hover:border-white/20 hover:text-white active:scale-95 pointer-events-auto cursor-pointer group"
-              style={{ "--stroke-width": "2" }}
-              onMouseEnter={(e) =>
-                e.currentTarget.style.setProperty("--stroke-width", "2.5")
-              }
-              onMouseLeave={(e) =>
-                e.currentTarget.style.setProperty("--stroke-width", "2")
-              }
-            >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                className="w-4 h-4 transition-all duration-300 pointer-events-none"
-                style={{ strokeWidth: "var(--stroke-width)" }}
-              >
-                <line x1="5" y1="12" x2="19" y2="12" />
-                <polyline points="12,5 19,12 12,19" />
-              </svg>
-            </button>
-          </form>
+          <SearchBar onSearch={handleSearch} />
         </div>
       </div>
     </>
