@@ -7,9 +7,13 @@ import {
   FiMapPin,
   FiGithub,
   FiTwitter,
+  FiAward,
+  FiTarget,
+  FiStar,
 } from "react-icons/fi";
 import { FaSteam } from "react-icons/fa6";
 import { SiGamemaker } from "react-icons/si";
+import { PiTrophyDuotone } from "react-icons/pi";
 
 const Yuna = () => {
   return (
@@ -81,7 +85,7 @@ const HeaderBlock = () => (
       href="#"
       className="flex items-center gap-1 text-red-300 hover:underline"
     >
-       Let's Play <FiArrowRight />
+      Let's Play <FiArrowRight />
     </a>
   </Block>
 );
@@ -168,39 +172,112 @@ const AboutBlock = () => (
     <p>
       My name is Catherine Capellan.{" "}
       <span className="text-zinc-400">
-        I specialize in competitive gaming and creating content. I love
-        exploring new games and sharing my journey with the community.
+        I love immersive story-driven adventures, complex simulation games, and
+        cozy farming experiences. From exploring the Wild West to managing space
+        colonies.
       </span>
     </p>
   </Block>
 );
 
 const LocationBlock = () => (
-  <Block className="col-span-12 flex flex-col items-center gap-2 md:col-span-3">
-    <FaSteam className="mt-2 text-3xl" />
-    <p className="text-center text-lg text-zinc-400">11kyupi</p>
+  <Block className="col-span-12 flex flex-col justify-between md:col-span-3">
+    <div className="flex flex-col items-center text-center">
+      <FaSteam className="text-4xl text-white mb-3" />
+      <div className="mb-4">
+        <p className="text-lg font-semibold text-zinc-200">11kyupi</p>
+        <p className="text-sm text-zinc-400">Steam Profile</p>
+      </div>
+    </div>
+
+    <div className="space-y-3">
+      <div className="flex items-center justify-between">
+        <span className="text-sm text-zinc-400">Status</span>
+        <div className="flex items-center gap-2">
+          <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+          <span className="text-sm text-green-400">Online</span>
+        </div>
+      </div>
+
+      <div className="flex items-center justify-between">
+        <span className="text-sm text-zinc-400">Level</span>
+        <span className="text-sm text-zinc-200 font-medium">47</span>
+      </div>
+
+      <div className="flex items-center justify-between">
+        <span className="text-sm text-zinc-400">Games</span>
+        <span className="text-sm text-zinc-200 font-medium">12</span>
+      </div>
+
+      <div className="flex items-center justify-between">
+        <span className="text-sm text-zinc-400">Hours</span>
+        <span className="text-sm text-zinc-200 font-medium">2.1k</span>
+      </div>
+    </div>
   </Block>
 );
 
 const EmailListBlock = () => (
   <Block className="col-span-12 md:col-span-9">
-    <p className="mb-3 text-lg">Join my gaming community</p>
-    <form
-      onSubmit={(e) => e.preventDefault()}
-      className="flex items-center gap-2"
-    >
-      <input
-        type="email"
-        placeholder="Enter your email"
-        className="w-full rounded border border-zinc-700 bg-zinc-800 px-3 py-1.5 transition-colors focus:border-red-300 focus:outline-0"
-      />
-      <button
-        type="submit"
-        className="flex items-center gap-2 whitespace-nowrap rounded bg-zinc-50 px-3 py-2 text-sm font-medium text-zinc-900 transition-colors hover:bg-zinc-300"
-      >
-        <FiMail /> Join now
+    <div className="mb-6 flex items-center justify-between">
+      <div className="flex items-center gap-3">
+        <PiTrophyDuotone className="text-2xl" />
+        <h3 className="text-xl font-medium font-figtree">
+          Recent Achievements
+        </h3>
+      </div>
+      <button className="flex items-center gap-2 text-sm text-zinc-400 hover:text-red-300 transition-colors group font-figtree">
+        <span>See more</span>
+        <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
       </button>
-    </form>
+    </div>
+
+    <div className="space-y-4">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-4">
+          <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+          <div>
+            <p className="font-medium text-zinc-100 font-figtree">
+              Red Dead Redemption 2
+            </p>
+            <p className="text-sm text-zinc-400 font-figtree">
+              100% Story Completion
+            </p>
+          </div>
+        </div>
+        <span className="text-xs text-zinc-500 font-figtree">3 days ago</span>
+      </div>
+
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-4">
+          <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
+          <div>
+            <p className="font-medium text-zinc-100 font-figtree">
+              Oxygen Not Included
+            </p>
+            <p className="text-sm text-zinc-400 font-figtree">
+              Cycle 1000 Achievement
+            </p>
+          </div>
+        </div>
+        <span className="text-xs text-zinc-500 font-figtree">1 week ago</span>
+      </div>
+
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-4">
+          <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+          <div>
+            <p className="font-medium text-zinc-100 font-figtree">
+              Stardew Valley
+            </p>
+            <p className="text-sm text-zinc-400 font-figtree">
+              Perfection Achievement
+            </p>
+          </div>
+        </div>
+        <span className="text-xs text-zinc-500 font-figtree">2 weeks ago</span>
+      </div>
+    </div>
   </Block>
 );
 
