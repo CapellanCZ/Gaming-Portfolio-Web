@@ -8,6 +8,8 @@ import Shozune from "./pages/Shozune";
 function App() {
   const [currentView, setCurrentView] = useState("home");
   const [currentPlayer, setCurrentPlayer] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   // Available players mapping
   const availablePlayers = {
@@ -15,21 +17,33 @@ function App() {
     // Add more players here as you create them
   };
 
+  // Get array of player names for suggestions
+  const playerNames = Object.keys(availablePlayers);
+
   const handleSearch = (searchTerm) => {
     const normalizedSearch = searchTerm.toLowerCase().trim();
     
-    if (availablePlayers[normalizedSearch]) {
-      setCurrentPlayer(availablePlayers[normalizedSearch]);
-      setCurrentView("player");
-    } else {
-      // Handle case when player is not found
-      alert(`Player "${searchTerm}" not found. Available players: ${Object.keys(availablePlayers).join(", ")}`);
-    }
+    setIsLoading(true);
+    setErrorMessage("");
+    
+    // Simulate search delay
+    setTimeout(() => {
+      if (availablePlayers[normalizedSearch]) {
+        setCurrentPlayer(availablePlayers[normalizedSearch]);
+        setCurrentView("player");
+        setIsLoading(false);
+      } else {
+        setErrorMessage(`Player "${searchTerm}" not found. Try: ${playerNames.join(", ")}`);
+        setIsLoading(false);
+      }
+    }, 800);
   };
 
   const handleBackToHome = () => {
     setCurrentView("home");
     setCurrentPlayer(null);
+    setIsLoading(false);
+    setErrorMessage("");
   };
 
   // Render player profile if viewing a player
@@ -84,7 +98,14 @@ function App() {
 
         {/* Search Bar */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <SearchBar onSearch={handleSearch} />
+          <SearchBar 
+            onSearch={handleSearch}
+            availablePlayers={playerNames}
+            isLoading={isLoading}
+            errorMessage={errorMessage}
+            showSuggestions={true}
+            placeholder="Search player IGN here..."
+          />
         </div>
       </div>
     </>
