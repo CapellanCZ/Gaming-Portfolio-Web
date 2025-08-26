@@ -398,15 +398,15 @@ const NinjaGamingProfile = () => {
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-gray-300">Games Played</span>
-                    <span className="text-green-400 font-medium">8</span>
+                    <span className="text-green-400 font-medium">3</span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-gray-300">Achievements</span>
-                    <span className="text-yellow-400 font-medium">12</span>
+                    <span className="text-yellow-400 font-medium">3</span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-gray-300">Most Played</span>
-                    <span className="text-purple-400 font-medium">Valorant</span>
+                    <span className="text-purple-400 font-medium">Roblox</span>
                   </div>
                 </div>
               </div>
