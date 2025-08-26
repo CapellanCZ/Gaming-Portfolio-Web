@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { Trophy, Calendar, MapPin } from "lucide-react";
-
 import Valorant from "../assets/Valorant.jpg";
 import League from "../assets/League.png";
 import WildRift from "../assets/WildRift.png";
 import HOK from "../assets/HOK.png";
 import CS2 from "../assets/CS2.png";
-import Achas from "../assets/Achas.jpg"; // <-- Import your avatar image
+import Achas from "../assets/Achas.jpg"; // 
 
 const TwitchProfile = () => {
   const [activeTab, setActiveTab] = useState("overview");
