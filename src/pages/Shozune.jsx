@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Eye, EyeOff, Sword, Shield, Target, Trophy, Users, Calendar, MapPin, Star } from 'lucide-react';
+import { Eye, EyeOff, Sword, Shield, Target, Trophy, Users, Calendar, MapPin, Star, Clock, Gamepad2, Heart } from 'lucide-react';
 
 // Smooth Cursor Component
 const SmoothCursor = () => {
@@ -28,7 +28,7 @@ const SmoothCursor = () => {
   return null;
 };
 
-// Dark Veil Background Component (simplified for this example)
+// Dark Veil Background Component
 const NinjaBackground = () => {
   return (
     <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-800">
@@ -77,8 +77,62 @@ const StatCard = ({ icon: Icon, label, value, color = "text-red-400" }) => (
   </div>
 );
 
+// Game Card Component
+const GameCard = ({ title, hours, achievements, status, genre, favorite = false }) => (
+  <div className="bg-black/30 backdrop-blur-sm border border-red-900/20 rounded-lg p-4 hover:border-red-500/40 transition-all duration-300 hover:scale-105">
+    <div className="flex items-start justify-between mb-3">
+      <div className="flex items-center gap-2">
+        <h4 className="font-semibold text-white">{title}</h4>
+        {favorite && <Heart className="w-4 h-4 text-red-400 fill-current" />}
+      </div>
+      <span className={`text-xs px-2 py-1 rounded-full ${
+        status === 'Playing' ? 'bg-green-900/30 text-green-400' :
+        status === 'Completed' ? 'bg-blue-900/30 text-blue-400' :
+        'bg-gray-900/30 text-gray-400'
+      }`}>
+        {status}
+      </span>
+    </div>
+    <div className="space-y-2">
+      <div className="flex justify-between items-center">
+        <span className="text-gray-400 text-sm">Hours Played</span>
+        <span className="text-red-300 font-medium">{hours}h</span>
+      </div>
+      <div className="flex justify-between items-center">
+        <span className="text-gray-400 text-sm">Achievements</span>
+        <span className="text-yellow-400 font-medium">{achievements}</span>
+      </div>
+      <div className="text-xs text-gray-500 mt-2">
+        {genre}
+      </div>
+    </div>
+  </div>
+);
+
+// Friend Card Component
+const FriendCard = ({ name, status, currentGame, avatar }) => (
+  <div className="flex items-center gap-3 p-3 bg-black/20 rounded-lg border border-gray-800/50 hover:border-red-900/50 transition-colors">
+    <div className="relative">
+      <div className="w-10 h-10 bg-gradient-to-r from-red-900/50 to-gray-800 rounded-full flex items-center justify-center text-lg">
+        {avatar}
+      </div>
+      <div className={`absolute -bottom-1 -right-1 w-3 h-3 rounded-full border-2 border-black ${
+        status === 'Online' ? 'bg-green-500' :
+        status === 'Away' ? 'bg-yellow-500' :
+        'bg-gray-500'
+      }`} />
+    </div>
+    <div className="flex-1 min-w-0">
+      <p className="font-medium text-white text-sm truncate">{name}</p>
+      <p className="text-xs text-gray-400 truncate">
+        {status === 'Online' && currentGame ? `Playing ${currentGame}` : status}
+      </p>
+    </div>
+  </div>
+);
+
 // Achievement Badge
-const AchievementBadge = ({ title, description, rarity = "common", unlocked = true }) => {
+const AchievementBadge = ({ title, description, rarity = "common", unlocked = true, game }) => {
   const rarityColors = {
     common: "border-gray-500 bg-gray-900/50",
     rare: "border-blue-500 bg-blue-900/20",
@@ -92,29 +146,11 @@ const AchievementBadge = ({ title, description, rarity = "common", unlocked = tr
         <Trophy className={`w-4 h-4 ${unlocked ? 'text-yellow-400' : 'text-gray-600'}`} />
         <h4 className="font-semibold text-sm text-white">{title}</h4>
       </div>
-      <p className="text-xs text-gray-400">{description}</p>
+      <p className="text-xs text-gray-400 mb-1">{description}</p>
+      <p className="text-xs text-gray-500">{game}</p>
     </div>
   );
 };
-
-// Recent Match Component
-const RecentMatch = ({ game, result, score, date, map }) => (
-  <div className="flex items-center justify-between p-3 bg-black/20 rounded-lg border border-gray-800/50 hover:border-red-900/50 transition-colors">
-    <div className="flex items-center gap-3">
-      <div className={`w-3 h-3 rounded-full ${result === 'Victory' ? 'bg-green-500' : 'bg-red-500'}`} />
-      <div>
-        <p className="font-medium text-white text-sm">{game}</p>
-        <p className="text-xs text-gray-400">{map} • {date}</p>
-      </div>
-    </div>
-    <div className="text-right">
-      <p className={`font-bold text-sm ${result === 'Victory' ? 'text-green-400' : 'text-red-400'}`}>
-        {result}
-      </p>
-      <p className="text-xs text-gray-400">{score}</p>
-    </div>
-  </div>
-);
 
 const NinjaGamingProfile = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -124,25 +160,40 @@ const NinjaGamingProfile = () => {
     setIsVisible(true);
   }, []);
 
-  const stats = [
-    { icon: Target, label: "Headshot %", value: "73.2%", color: "text-red-400" },
-    { icon: Trophy, label: "Wins", value: "1,247", color: "text-yellow-400" },
-    { icon: Shield, label: "K/D Ratio", value: "2.84", color: "text-green-400" },
-    { icon: Sword, label: "Melee Kills", value: "892", color: "text-purple-400" },
+  const totalStats = [
+    { icon: Clock, label: "Total Hours", value: "2,847h", color: "text-blue-400" },
+    { icon: Trophy, label: "Achievements", value: "1,249", color: "text-yellow-400" },
+    { icon: Gamepad2, label: "Games Owned", value: "187", color: "text-green-400" },
+    { icon: Target, label: "Completion Rate", value: "78%", color: "text-purple-400" },
+  ];
+
+  const favoriteGames = [
+    { title: "Valorant", hours: 847, achievements: "45/50", status: "Playing", genre: "Tactical Shooter", favorite: true },
+    { title: "Elden Ring", hours: 234, achievements: "38/42", status: "Completed", genre: "Action RPG", favorite: true },
+    { title: "Cyberpunk 2077", hours: 156, achievements: "28/35", status: "Playing", genre: "RPG", favorite: false },
+    { title: "Ghost of Tsushima", hours: 89, achievements: "24/30", status: "Completed", genre: "Action Adventure", favorite: true },
+    { title: "Sekiro", hours: 127, achievements: "34/34", status: "Completed", genre: "Action", favorite: true },
+    { title: "Hades", hours: 67, achievements: "49/49", status: "Completed", genre: "Roguelike", favorite: false },
+  ];
+
+  const friends = [
+    { name: "KageWarrior", status: "Online", currentGame: "Valorant", avatar: "🥷" },
+    { name: "ShadowBlade", status: "Online", currentGame: "Elden Ring", avatar: "⚔️" },
+    { name: "NightHunter", status: "Away", currentGame: null, avatar: "🏹" },
+    { name: "StealthMaster", status: "Online", currentGame: "Ghost of Tsushima", avatar: "👤" },
+    { name: "DarkSamurai", status: "Offline", currentGame: null, avatar: "🗾" },
+    { name: "MysticNinja", status: "Online", currentGame: "Sekiro", avatar: "🌸" },
+    { name: "VoidWalker", status: "Away", currentGame: null, avatar: "🌙" },
+    { name: "CrimsonEdge", status: "Online", currentGame: "Cyberpunk 2077", avatar: "🔥" },
   ];
 
   const achievements = [
-    { title: "Shadow Master", description: "Complete 100 stealth kills", rarity: "legendary", unlocked: true },
-    { title: "Silent Assassin", description: "Win 5 rounds without being detected", rarity: "epic", unlocked: true },
-    { title: "Blade Dancer", description: "Get 50 consecutive melee kills", rarity: "rare", unlocked: true },
-    { title: "Ghost Walker", description: "Play 1000 hours in stealth games", rarity: "common", unlocked: false },
-  ];
-
-  const recentMatches = [
-    { game: "Valorant", result: "Victory", score: "24-12-6", date: "2 hours ago", map: "Haven" },
-    { game: "CS2", result: "Victory", score: "18-8-4", date: "5 hours ago", map: "Dust2" },
-    { game: "Apex Legends", result: "Defeat", score: "8-3-2", date: "1 day ago", map: "King's Canyon" },
-    { game: "Valorant", result: "Victory", score: "21-15-8", date: "2 days ago", map: "Bind" },
+    { title: "Master Collector", description: "Own 100+ games in library", rarity: "epic", unlocked: true, game: "Steam Profile" },
+    { title: "Completionist", description: "100% completion in 5 games", rarity: "legendary", unlocked: true, game: "Global" },
+    { title: "Night Owl", description: "Play 100 hours after midnight", rarity: "rare", unlocked: true, game: "Global" },
+    { title: "Social Gamer", description: "Play co-op games for 50 hours", rarity: "common", unlocked: true, game: "Global" },
+    { title: "Speedrunner", description: "Complete any game under par time", rarity: "epic", unlocked: true, game: "Sekiro" },
+    { title: "Legendary Hunter", description: "Defeat all bosses in Elden Ring", rarity: "legendary", unlocked: false, game: "Elden Ring" },
   ];
 
   return (
@@ -169,7 +220,7 @@ const NinjaGamingProfile = () => {
               <h1 className="text-4xl font-bold bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent mb-2">
                 Shozune
               </h1>
-              <p className="text-gray-400 mb-4 text-center lg:text-left">Professional Stealth Gamer</p>
+              <p className="text-gray-400 mb-4 text-center lg:text-left">Shadow Gaming Master</p>
               
               <div className="flex items-center gap-4 text-sm text-gray-400">
                 <div className="flex items-center gap-1">
@@ -178,14 +229,14 @@ const NinjaGamingProfile = () => {
                 </div>
                 <div className="flex items-center gap-1">
                   <Calendar className="w-4 h-4" />
-                  <span>Joined 2019</span>
+                  <span>Gaming since 2015</span>
                 </div>
               </div>
             </div>
 
-            {/* Stats Grid */}
+            {/* Total Stats Grid */}
             <div className="flex-1 grid grid-cols-2 lg:grid-cols-4 gap-4">
-              {stats.map((stat, index) => (
+              {totalStats.map((stat, index) => (
                 <div
                   key={index}
                   className={`transition-all duration-500 delay-${index * 100}`}
@@ -199,7 +250,7 @@ const NinjaGamingProfile = () => {
 
           {/* Navigation Tabs */}
           <div className="flex gap-1 mb-8 bg-black/30 backdrop-blur-sm rounded-lg p-1 border border-gray-800/50">
-            {['overview', 'matches', 'achievements'].map((tab) => (
+            {['overview', 'games', 'achievements', 'friends'].map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
@@ -223,36 +274,36 @@ const NinjaGamingProfile = () => {
                   <div className="bg-black/40 backdrop-blur-sm border border-red-900/30 rounded-lg p-6">
                     <h3 className="text-xl font-bold mb-4 text-red-400">About</h3>
                     <p className="text-gray-300 leading-relaxed">
-                      Master of shadows and precision, Shozune has dominated the competitive gaming scene for over 5 years. 
-                      Specializing in tactical shooters and stealth-based gameplay, they are known for their exceptional aim, 
-                      strategic thinking, and ability to remain undetected in the most challenging situations.
+                      A shadow in the digital realm, Shozune has mastered games across all genres with the precision and stealth of a true ninja. 
+                      From tactical shooters to epic RPGs, action adventures to indie gems - every game is conquered with strategic thinking and 
+                      relentless dedication. The way of the gaming ninja is one of patience, skill, and honor.
                     </p>
                     <div className="mt-4 flex flex-wrap gap-2">
-                      {['Valorant', 'CS2', 'Rainbow Six Siege', 'Apex Legends'].map((game) => (
-                        <span key={game} className="px-3 py-1 bg-red-900/30 text-red-300 rounded-full text-sm">
-                          {game}
+                      {['Action RPG', 'Tactical Shooter', 'Adventure', 'Strategy', 'Indie', 'Roguelike'].map((genre) => (
+                        <span key={genre} className="px-3 py-1 bg-red-900/30 text-red-300 rounded-full text-sm">
+                          {genre}
                         </span>
                       ))}
                     </div>
                   </div>
 
                   <div className="bg-black/40 backdrop-blur-sm border border-red-900/30 rounded-lg p-6">
-                    <h3 className="text-xl font-bold mb-4 text-red-400">Recent Activity</h3>
-                    <div className="space-y-3">
-                      {recentMatches.map((match, index) => (
-                        <RecentMatch key={index} {...match} />
+                    <h3 className="text-xl font-bold mb-4 text-red-400">Favorite Games</h3>
+                    <div className="grid sm:grid-cols-2 gap-4">
+                      {favoriteGames.slice(0, 4).map((game, index) => (
+                        <GameCard key={index} {...game} />
                       ))}
                     </div>
                   </div>
                 </div>
               )}
 
-              {activeTab === 'matches' && (
+              {activeTab === 'games' && (
                 <div className="bg-black/40 backdrop-blur-sm border border-red-900/30 rounded-lg p-6">
-                  <h3 className="text-xl font-bold mb-4 text-red-400">Match History</h3>
-                  <div className="space-y-3">
-                    {recentMatches.map((match, index) => (
-                      <RecentMatch key={index} {...match} />
+                  <h3 className="text-xl font-bold mb-4 text-red-400">Game Library</h3>
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    {favoriteGames.map((game, index) => (
+                      <GameCard key={index} {...game} />
                     ))}
                   </div>
                 </div>
@@ -268,60 +319,94 @@ const NinjaGamingProfile = () => {
                   </div>
                 </div>
               )}
+
+              {activeTab === 'friends' && (
+                <div className="bg-black/40 backdrop-blur-sm border border-red-900/30 rounded-lg p-6">
+                  <h3 className="text-xl font-bold mb-4 text-red-400">Gaming Circle</h3>
+                  <div className="grid sm:grid-cols-2 gap-3">
+                    {friends.map((friend, index) => (
+                      <FriendCard key={index} {...friend} />
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Sidebar */}
             <div className="space-y-6">
-              {/* Rank Card */}
+              {/* Current Status */}
               <div className="bg-black/40 backdrop-blur-sm border border-red-900/30 rounded-lg p-6">
-                <h3 className="text-lg font-bold mb-4 text-red-400">Current Rank</h3>
+                <h3 className="text-lg font-bold mb-4 text-red-400">Current Status</h3>
                 <div className="text-center">
-                  <div className="w-20 h-20 mx-auto mb-3 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-lg flex items-center justify-center shadow-lg">
-                    <Star className="w-10 h-10 text-black" />
+                  <div className="w-16 h-16 mx-auto mb-3 bg-gradient-to-r from-green-400 to-green-600 rounded-lg flex items-center justify-center shadow-lg">
+                    <Gamepad2 className="w-8 h-8 text-black" />
                   </div>
-                  <h4 className="font-bold text-yellow-400">Immortal III</h4>
-                  <p className="text-sm text-gray-400">2,847 RR</p>
+                  <h4 className="font-bold text-green-400">Currently Playing</h4>
+                  <p className="text-sm text-gray-400">Valorant - Ranked</p>
+                  <div className="mt-3 flex items-center justify-center gap-2">
+                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                    <span className="text-xs text-green-300">Live</span>
+                  </div>
                 </div>
               </div>
 
-              {/* Team */}
+              {/* Gaming Setup */}
               <div className="bg-black/40 backdrop-blur-sm border border-red-900/30 rounded-lg p-6">
-                <h3 className="text-lg font-bold mb-4 text-red-400">Team</h3>
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-8 h-8 bg-red-900/50 rounded-full flex items-center justify-center">
-                    <Users className="w-4 h-4 text-red-400" />
+                <h3 className="text-lg font-bold mb-4 text-red-400">Shadow Setup</h3>
+                <div className="space-y-3 text-sm">
+                  <div className="flex justify-between">
+                    <span className="text-gray-400">GPU</span>
+                    <span className="text-gray-300">RTX 4080</span>
                   </div>
-                  <div>
-                    <p className="font-medium text-white">Shadow Clan</p>
-                    <p className="text-xs text-gray-400">Professional Esports</p>
+                  <div className="flex justify-between">
+                    <span className="text-gray-400">CPU</span>
+                    <span className="text-gray-300">Ryzen 9 7900X</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-400">RAM</span>
+                    <span className="text-gray-300">32GB DDR5</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-400">Monitor</span>
+                    <span className="text-gray-300">240Hz OLED</span>
                   </div>
                 </div>
-                <p className="text-sm text-gray-300">
-                  Elite competitive team specializing in tactical FPS games with multiple championship titles.
-                </p>
               </div>
 
-              {/* Streaming Schedule */}
+              {/* Online Friends */}
               <div className="bg-black/40 backdrop-blur-sm border border-red-900/30 rounded-lg p-6">
-                <h3 className="text-lg font-bold mb-4 text-red-400">Streaming</h3>
-                <div className="space-y-2">
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-300">Monday</span>
-                    <span className="text-gray-400">8PM - 12AM JST</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-300">Wednesday</span>
-                    <span className="text-gray-400">8PM - 12AM JST</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-300">Saturday</span>
-                    <span className="text-gray-400">6PM - 2AM JST</span>
-                  </div>
+                <h3 className="text-lg font-bold mb-4 text-red-400">Online Now</h3>
+                <div className="space-y-3">
+                  {friends.filter(f => f.status === 'Online').slice(0, 4).map((friend, index) => (
+                    <FriendCard key={index} {...friend} />
+                  ))}
                 </div>
                 <div className="mt-4 text-center">
-                  <div className="inline-flex items-center gap-2 px-3 py-2 bg-purple-900/30 border border-purple-500/30 rounded-lg">
-                    <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
-                    <span className="text-sm text-purple-300">Live Now</span>
+                  <button className="text-sm text-red-400 hover:text-red-300 transition-colors">
+                    View All Friends ({friends.length})
+                  </button>
+                </div>
+              </div>
+
+              {/* Weekly Activity */}
+              <div className="bg-black/40 backdrop-blur-sm border border-red-900/30 rounded-lg p-6">
+                <h3 className="text-lg font-bold mb-4 text-red-400">This Week</h3>
+                <div className="space-y-2">
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-300">Hours Played</span>
+                    <span className="text-blue-400 font-medium">47.2h</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-300">Games Played</span>
+                    <span className="text-green-400 font-medium">8</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-300">Achievements</span>
+                    <span className="text-yellow-400 font-medium">12</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-300">Most Played</span>
+                    <span className="text-purple-400 font-medium">Valorant</span>
                   </div>
                 </div>
               </div>
