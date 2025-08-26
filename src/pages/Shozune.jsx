@@ -161,30 +161,30 @@ const NinjaGamingProfile = () => {
   }, []);
 
   const totalStats = [
-    { icon: Clock, label: "Total Hours", value: "2,847h", color: "text-blue-400" },
+    { icon: Clock, label: "Total Hours", value: "5,234h", color: "text-blue-400" },
     { icon: Trophy, label: "Achievements", value: "1,249", color: "text-yellow-400" },
-    { icon: Gamepad2, label: "Games Owned", value: "187", color: "text-green-400" },
-    { icon: Target, label: "Completion Rate", value: "78%", color: "text-purple-400" },
+    { icon: Gamepad2, label: "Games Owned", value: "124", color: "text-green-400" },
+    { icon: Target, label: "Completion Rate", value: "62%", color: "text-purple-400" },
   ];
 
   const favoriteGames = [
-    { title: "Valorant", hours: 847, achievements: "45/50", status: "Playing", genre: "Tactical Shooter", favorite: true },
-    { title: "Elden Ring", hours: 234, achievements: "38/42", status: "Completed", genre: "Action RPG", favorite: true },
-    { title: "Cyberpunk 2077", hours: 156, achievements: "28/35", status: "Playing", genre: "RPG", favorite: false },
-    { title: "Ghost of Tsushima", hours: 89, achievements: "24/30", status: "Completed", genre: "Action Adventure", favorite: true },
-    { title: "Sekiro", hours: 127, achievements: "34/34", status: "Completed", genre: "Action", favorite: true },
-    { title: "Hades", hours: 67, achievements: "49/49", status: "Completed", genre: "Roguelike", favorite: false },
+    { title: "Roblox", hours: 1213, achievements: "259/520", status: "Playing", genre: "Adventure", favorite: true },
+    { title: "Minecraft", hours: 624, achievements: "53/122", status: "Playing", genre: "Adventure", favorite: true },
+    { title: "Valorant", hours: 827, achievements: "28/35", status: "Playing", genre: "Tactical Shooter / FPS", favorite:false },
+    { title: "Pokemon", hours: 423, achievements: "424/1,025", status: "Playing", genre: "Action Adventure", favorite: true },
+    { title: "League Of Legends", hours: 127, achievements: "34/34", status: "Playing", genre: "MOBA", favorite: false },
+    { title: "Warframe", hours: 1310, achievements: "42/193", status: "Playing", genre: "Sci-fi", favorite: true },
   ];
 
   const friends = [
-    { name: "KageWarrior", status: "Online", currentGame: "Valorant", avatar: "🥷" },
-    { name: "ShadowBlade", status: "Online", currentGame: "Elden Ring", avatar: "⚔️" },
-    { name: "NightHunter", status: "Away", currentGame: null, avatar: "🏹" },
-    { name: "StealthMaster", status: "Online", currentGame: "Ghost of Tsushima", avatar: "👤" },
-    { name: "DarkSamurai", status: "Offline", currentGame: null, avatar: "🗾" },
-    { name: "MysticNinja", status: "Online", currentGame: "Sekiro", avatar: "🌸" },
-    { name: "VoidWalker", status: "Away", currentGame: null, avatar: "🌙" },
-    { name: "CrimsonEdge", status: "Online", currentGame: "Cyberpunk 2077", avatar: "🔥" },
+    { name: "Kash_Breezy", status: "Online", currentGame: "Roblox", avatar: "🥷" },
+    { name: "Leecher", status: "Online", currentGame: "Valorant", avatar: "⚔️" },
+    { name: "Katsuhiroshi", status: "Offline", currentGame: null, avatar: "🏹" },
+    { name: "JEPV", status: "Online", currentGame: "Valorant", avatar: "👤" },
+    { name: "lichhh29", status: "Online", currentGame: "Roblox", avatar: "🗾" },
+    { name: "Mitsu", status: "Online", currentGame: "Valorant", avatar: "🌸" },
+    { name: "Kon", status: "Online", currentGame: "League of Legends", avatar: "🌙" },
+    { name: "Gumiii", status: "Online", currentGame: "Roblox", avatar: "🔥" },
   ];
 
   const achievements = [
@@ -192,7 +192,7 @@ const NinjaGamingProfile = () => {
     { title: "Completionist", description: "100% completion in 5 games", rarity: "legendary", unlocked: true, game: "Global" },
     { title: "Night Owl", description: "Play 100 hours after midnight", rarity: "rare", unlocked: true, game: "Global" },
     { title: "Social Gamer", description: "Play co-op games for 50 hours", rarity: "common", unlocked: true, game: "Global" },
-    { title: "Speedrunner", description: "Complete any game under par time", rarity: "epic", unlocked: true, game: "Sekiro" },
+    { title: "Speedrunner", description: "Complete any game under par time", rarity: "epic", unlocked: true, game: "Minecraft" },
     { title: "Legendary Hunter", description: "Defeat all bosses in Elden Ring", rarity: "legendary", unlocked: false, game: "Elden Ring" },
   ];
 
@@ -220,16 +220,16 @@ const NinjaGamingProfile = () => {
               <h1 className="text-4xl font-bold bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent mb-2">
                 Shozune
               </h1>
-              <p className="text-gray-400 mb-4 text-center lg:text-left">Shadow Gaming Master</p>
+              <p className="text-gray-400 mb-4 text-center lg:text-left">Professional Gamer</p>
               
               <div className="flex items-center gap-4 text-sm text-gray-400">
                 <div className="flex items-center gap-1">
                   <MapPin className="w-4 h-4" />
-                  <span>Tokyo, Japan</span>
+                  <span>Cavite, Philippines</span>
                 </div>
                 <div className="flex items-center gap-1">
                   <Calendar className="w-4 h-4" />
-                  <span>Gaming since 2015</span>
+                  <span>Gaming since 2007</span>
                 </div>
               </div>
             </div>
@@ -274,12 +274,12 @@ const NinjaGamingProfile = () => {
                   <div className="bg-black/40 backdrop-blur-sm border border-red-900/30 rounded-lg p-6">
                     <h3 className="text-xl font-bold mb-4 text-red-400">About</h3>
                     <p className="text-gray-300 leading-relaxed">
-                      A shadow in the digital realm, Shozune has mastered games across all genres with the precision and stealth of a true ninja. 
-                      From tactical shooters to epic RPGs, action adventures to indie gems - every game is conquered with strategic thinking and 
-                      relentless dedication. The way of the gaming ninja is one of patience, skill, and honor.
+                      Once who was a noob in gaming, now a pro. Shozune is a dedicated gamer with over 12 years of experience in competitive gaming. 
+                      Known for his strategic mind and quick reflexes, he has made a name for himself in the esports community. 
+                      When he's not gaming, Shozune enjoys streaming his gameplay and sharing tips with his followers.
                     </p>
                     <div className="mt-4 flex flex-wrap gap-2">
-                      {['Action RPG', 'Tactical Shooter', 'Adventure', 'Strategy', 'Indie', 'Roguelike'].map((genre) => (
+                      {['Action RPG', 'Tactical Shooter', 'Adventure', 'Strategy', 'Indie', 'Roguelike', 'MMORPG','Action'].map((genre) => (
                         <span key={genre} className="px-3 py-1 bg-red-900/30 text-red-300 rounded-full text-sm">
                           {genre}
                         </span>
@@ -342,9 +342,9 @@ const NinjaGamingProfile = () => {
                     <Gamepad2 className="w-8 h-8 text-black" />
                   </div>
                   <h4 className="font-bold text-green-400">Currently Playing</h4>
-                  <p className="text-sm text-gray-400">Valorant - Ranked</p>
+                  <p className="text-sm text-gray-400">Roblox - Grow a Garden</p>
                   <div className="mt-3 flex items-center justify-center gap-2">
-                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                    <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
                     <span className="text-xs text-green-300">Live</span>
                   </div>
                 </div>
@@ -356,19 +356,19 @@ const NinjaGamingProfile = () => {
                 <div className="space-y-3 text-sm">
                   <div className="flex justify-between">
                     <span className="text-gray-400">GPU</span>
-                    <span className="text-gray-300">RTX 4080</span>
+                    <span className="text-gray-300">None</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-400">CPU</span>
-                    <span className="text-gray-300">Ryzen 9 7900X</span>
+                    <span className="text-gray-300">AMD Ryzen 5 5600G</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-400">RAM</span>
-                    <span className="text-gray-300">32GB DDR5</span>
+                    <span className="text-gray-300">16GB</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-400">Monitor</span>
-                    <span className="text-gray-300">240Hz OLED</span>
+                    <span className="text-gray-300">100Hz OLED</span>
                   </div>
                 </div>
               </div>
@@ -398,15 +398,15 @@ const NinjaGamingProfile = () => {
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-gray-300">Games Played</span>
-                    <span className="text-green-400 font-medium">8</span>
+                    <span className="text-green-400 font-medium">3</span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-gray-300">Achievements</span>
-                    <span className="text-yellow-400 font-medium">12</span>
+                    <span className="text-yellow-400 font-medium">3</span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-gray-300">Most Played</span>
-                    <span className="text-purple-400 font-medium">Valorant</span>
+                    <span className="text-purple-400 font-medium">Roblox</span>
                   </div>
                 </div>
               </div>

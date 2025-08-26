@@ -4,7 +4,7 @@ import TextType from "./blocks/TextAnimations/TextType/TextType";
 import { SmoothCursor } from "./components/ui/smooth-cursor";
 import SearchBar from "./SearchBar";
 import Shozune from "./pages/Shozune";
-import Mitsu from "./pages/Mitsu";
+import Shozune from "./pages/Mitsu";
 
 function App() {
   const [currentView, setCurrentView] = useState("home");
@@ -16,6 +16,7 @@ function App() {
   const availablePlayers = {
     "shozune": { name: "Shozune", component: Shozune },
     "mitsu": { name: "Mitsu", component: Mitsu },
+
     // Add more players here as you create them
   };
 
