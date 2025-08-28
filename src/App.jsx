@@ -19,11 +19,8 @@ function App() {
   const availablePlayers = {
     "shozune": { name: "Shozune", component: Shozune },
     "mitsu": { name: "Mitsu", component: Mitsu },
-    "yuna": { name: "Yuna", component: Yuna },
+    "11kyupi": { name: "Yuna", component: Yuna },
     "pewpew": { name: "Pewpew", component: Pewpew },
-
-
-
     // Add more players here as you create them
   };
 
