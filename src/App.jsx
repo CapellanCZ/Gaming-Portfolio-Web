@@ -91,7 +91,7 @@ function App() {
         {/* Header Section */}
         <div className="absolute top-50 left-0 right-0 flex flex-col items-center pt-8 sm:pt-16 pb-6 sm:pb-8 px-4">
           <TextType
-            text={["Gaming Portfolio", "developed by", "BisaCool"]}
+            text={["Gaming Portfolio", "developed by", "HeiGui"]}
             typingSpeed={75}
             pauseDuration={1500}
             showCursor={true}
