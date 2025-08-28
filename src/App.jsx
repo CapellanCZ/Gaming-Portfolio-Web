@@ -6,6 +6,7 @@ import SearchBar from "./SearchBar";
 import Shozune from "./pages/Shozune";
 import Mitsu from "./pages/Mitsu";
 import Yuna from "./pages/Yuna";
+import Pewpew from "./pages/Pewpew";
 
 
 function App() {
@@ -19,6 +20,8 @@ function App() {
     "shozune": { name: "Shozune", component: Shozune },
     "mitsu": { name: "Mitsu", component: Mitsu },
     "yuna": { name: "Yuna", component: Yuna },
+    "pewpew": { name: "Pewpew", component: Pewpew },
+
 
 
     // Add more players here as you create them
