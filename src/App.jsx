@@ -8,7 +8,6 @@ import Mitsu from "./pages/Mitsu";
 import Yuna from "./pages/Yuna";
 import Pewpew from "./pages/Pewpew";
 
-
 function App() {
   const [currentView, setCurrentView] = useState("home");
   const [currentPlayer, setCurrentPlayer] = useState(null);
@@ -17,10 +16,10 @@ function App() {
 
   // Available players mapping
   const availablePlayers = {
-    "shozune": { name: "Shozune", component: Shozune },
-    "mitsu": { name: "Mitsu", component: Mitsu },
+    shozune: { name: "Shozune", component: Shozune },
+    mitsu: { name: "Mitsu", component: Mitsu },
     "11kyupi": { name: "Yuna", component: Yuna },
-    "pewpew": { name: "Pewpew", component: Pewpew },
+    pewpew: { name: "Pewpew", component: Pewpew },
     // Add more players here as you create them
   };
 
@@ -29,10 +28,10 @@ function App() {
 
   const handleSearch = (searchTerm) => {
     const normalizedSearch = searchTerm.toLowerCase().trim();
-    
+
     setIsLoading(true);
     setErrorMessage("");
-    
+
     // Simulate search delay
     setTimeout(() => {
       if (availablePlayers[normalizedSearch]) {
@@ -40,7 +39,9 @@ function App() {
         setCurrentView("player");
         setIsLoading(false);
       } else {
-        setErrorMessage(`Player "${searchTerm}" not found. Try: ${playerNames.join(", ")}`);
+        setErrorMessage(
+          `Player "${searchTerm}" not found. Try: ${playerNames.join(", ")}`
+        );
         setIsLoading(false);
       }
     }, 800);
@@ -105,7 +106,7 @@ function App() {
 
         {/* Search Bar */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <SearchBar 
+          <SearchBar
             onSearch={handleSearch}
             availablePlayers={playerNames}
             isLoading={isLoading}

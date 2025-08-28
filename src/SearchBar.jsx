@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 
-const SearchBar = ({ 
-  onSearch, 
+const SearchBar = ({
+  onSearch,
   className = "",
   placeholder = "Search player IGN here...",
   availablePlayers = [],
   isLoading = false,
   errorMessage = "",
-  showSuggestions = true
+  showSuggestions = true,
 }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [suggestions, setSuggestions] = useState([]);
@@ -17,11 +17,13 @@ const SearchBar = ({
   // Filter suggestions based on search term
   useEffect(() => {
     if (searchTerm && availablePlayers.length > 0) {
-      const filtered = availablePlayers.filter(player =>
+      const filtered = availablePlayers.filter((player) =>
         player.toLowerCase().includes(searchTerm.toLowerCase())
       );
       setSuggestions(filtered);
-      setShowDropdown(filtered.length > 0 && showSuggestions && searchTerm.length > 0);
+      setShowDropdown(
+        filtered.length > 0 && showSuggestions && searchTerm.length > 0
+      );
     } else {
       setSuggestions([]);
       setShowDropdown(false);
@@ -77,7 +79,7 @@ const SearchBar = ({
 
   return (
     <div className="relative">
-      <form 
+      <form
         onSubmit={handleSubmit}
         className={`relative flex items-center w-230 h-20 max-w-4xl bg-[#2d2d2d]/80 backdrop-blur-lg border ${
           searchState === "error" ? "border-red-500/50" : "border-white/10"
@@ -86,10 +88,34 @@ const SearchBar = ({
         {/* Search Icon */}
         <span className="flex items-center justify-center px-6 py-5 text-white/60 transition-all duration-300 group-focus-within:text-white pointer-events-none">
           {searchState === "searching" ? (
-            <svg className="animate-spin w-6 h-6" viewBox="0 0 24 24" fill="none">
-              <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeDasharray="32" strokeDashoffset="32">
-                <animate attributeName="stroke-dasharray" dur="2s" values="0 32;16 16;0 32;0 32" repeatCount="indefinite"/>
-                <animate attributeName="stroke-dashoffset" dur="2s" values="0;-16;-32;-32" repeatCount="indefinite"/>
+            <svg
+              className="animate-spin w-6 h-6"
+              viewBox="0 0 24 24"
+              fill="none"
+            >
+              <circle
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="2"
+                fill="none"
+                strokeLinecap="round"
+                strokeDasharray="32"
+                strokeDashoffset="32"
+              >
+                <animate
+                  attributeName="stroke-dasharray"
+                  dur="2s"
+                  values="0 32;16 16;0 32;0 32"
+                  repeatCount="indefinite"
+                />
+                <animate
+                  attributeName="stroke-dashoffset"
+                  dur="2s"
+                  values="0;-16;-32;-32"
+                  repeatCount="indefinite"
+                />
               </circle>
             </svg>
           ) : (
@@ -128,7 +154,8 @@ const SearchBar = ({
           className="relative flex items-center justify-center bg-white/5 border border-white/10 rounded-4xl text-white/70 p-4 ml-1 mr-2 transition-all duration-300 overflow-hidden hover:bg-white/10 hover:border-white/20 hover:text-white active:scale-95 pointer-events-auto cursor-pointer group disabled:opacity-50 disabled:cursor-not-allowed"
           style={{ "--stroke-width": "2" }}
           onMouseEnter={(e) =>
-            !isLoading && e.currentTarget.style.setProperty("--stroke-width", "2.5")
+            !isLoading &&
+            e.currentTarget.style.setProperty("--stroke-width", "2.5")
           }
           onMouseLeave={(e) =>
             e.currentTarget.style.setProperty("--stroke-width", "2")
@@ -151,7 +178,9 @@ const SearchBar = ({
       {showDropdown && suggestions.length > 0 && (
         <div className="absolute top-full left-0 right-0 mt-2 bg-[#2d2d2d]/90 backdrop-blur-lg border border-white/10 rounded-lg shadow-2xl z-10 max-h-60 overflow-y-auto">
           <div className="p-2">
-            <p className="text-xs text-white/50 px-3 py-1 font-figtree">Available Players:</p>
+            <p className="text-xs text-white/50 px-3 py-1 font-figtree">
+              Available Players:
+            </p>
             {suggestions.map((suggestion, index) => (
               <button
                 key={index}
@@ -169,8 +198,16 @@ const SearchBar = ({
       {searchState === "error" && errorMessage && (
         <div className="absolute top-full left-0 right-0 mt-2 bg-red-900/20 backdrop-blur-sm border border-red-500/30 rounded-lg p-3 z-10">
           <div className="flex items-center gap-2">
-            <svg className="w-4 h-4 text-red-400" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+            <svg
+              className="w-4 h-4 text-red-400"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                fillRule="evenodd"
+                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                clipRule="evenodd"
+              />
             </svg>
             <p className="text-red-400 text-sm font-figtree">{errorMessage}</p>
           </div>
@@ -181,27 +218,48 @@ const SearchBar = ({
       {searchState === "success" && (
         <div className="absolute top-full left-0 right-0 mt-2 bg-green-900/20 backdrop-blur-sm border border-green-500/30 rounded-lg p-3 z-10">
           <div className="flex items-center gap-2">
-            <svg className="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+            <svg
+              className="w-4 h-4 text-green-400"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                fillRule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                clipRule="evenodd"
+              />
             </svg>
-            <p className="text-green-400 text-sm font-figtree">Player found! Redirecting...</p>
+            <p className="text-green-400 text-sm font-figtree">
+              Player found! Redirecting...
+            </p>
           </div>
         </div>
       )}
 
       {/* No results message - Conditional Rendering */}
-      {searchTerm && searchState === "idle" && availablePlayers.length > 0 && suggestions.length === 0 && (
-        <div className="absolute top-full left-0 right-0 mt-2 bg-yellow-900/20 backdrop-blur-sm border border-yellow-500/30 rounded-lg p-3 z-10">
-          <div className="flex items-center gap-2">
-            <svg className="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-            </svg>
-            <p className="text-yellow-400 text-sm font-figtree">
-              No matches found. Try: {availablePlayers.join(", ")}
-            </p>
+      {searchTerm &&
+        searchState === "idle" &&
+        availablePlayers.length > 0 &&
+        suggestions.length === 0 && (
+          <div className="absolute top-full left-0 right-0 mt-2 bg-yellow-900/20 backdrop-blur-sm border border-yellow-500/30 rounded-lg p-3 z-10">
+            <div className="flex items-center gap-2">
+              <svg
+                className="w-4 h-4 text-yellow-400"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              <p className="text-yellow-400 text-sm font-figtree">
+                No matches found. Try: {availablePlayers.join(", ")}
+              </p>
+            </div>
           </div>
-        </div>
-      )}
+        )}
     </div>
   );
 };
