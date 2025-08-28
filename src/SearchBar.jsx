@@ -78,18 +78,18 @@ const SearchBar = ({
   };
 
   return (
-    <div className="relative">
+    <div className="relative w-full max-w-4xl px-4">
       <form
         onSubmit={handleSubmit}
-        className={`relative flex items-center w-230 h-20 max-w-4xl bg-[#2d2d2d]/80 backdrop-blur-lg border ${
+        className={`relative flex items-center w-full h-16 sm:h-20 bg-[#2d2d2d]/80 backdrop-blur-lg border ${
           searchState === "error" ? "border-red-500/50" : "border-white/10"
         } rounded-full p-2 shadow-2xl overflow-hidden transition-all duration-300 hover:-translate-y-0.5 focus-within:-translate-y-0.5 group pointer-events-auto ${className}`}
       >
         {/* Search Icon */}
-        <span className="flex items-center justify-center px-6 py-5 text-white/60 transition-all duration-300 group-focus-within:text-white pointer-events-none">
+        <span className="flex items-center justify-center px-3 sm:px-6 py-4 sm:py-5 text-white/60 transition-all duration-300 group-focus-within:text-white pointer-events-none">
           {searchState === "searching" ? (
             <svg
-              className="animate-spin w-6 h-6"
+              className="animate-spin w-5 h-5 sm:w-6 sm:h-6"
               viewBox="0 0 24 24"
               fill="none"
             >
@@ -123,7 +123,7 @@ const SearchBar = ({
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              className="w-6 h-6 transition-all duration-300 group-focus-within:stroke-[2.5]"
+              className="w-5 h-5 sm:w-6 sm:h-6 transition-all duration-300 group-focus-within:stroke-[2.5]"
             >
               <circle cx="11" cy="11" r="8" />
               <path d="M21 21l-4.35-4.35" />
@@ -139,19 +139,19 @@ const SearchBar = ({
           onFocus={handleInputFocus}
           onBlur={handleInputBlur}
           disabled={isLoading}
-          className="flex-1 bg-transparent border-none outline-none text-white/90 text-md font-figtree px-0 py-5 placeholder:text-white/40 transition-colors duration-300 focus:placeholder:text-white/30 disabled:opacity-50"
+          className="flex-1 bg-transparent border-none outline-none text-white/90 text-sm sm:text-md font-figtree px-0 py-4 sm:py-5 placeholder:text-white/40 transition-colors duration-300 focus:placeholder:text-white/30 disabled:opacity-50"
           placeholder={isLoading ? "Searching..." : placeholder}
           autoComplete="off"
         />
 
         {/* Divider */}
-        <span className="mx-3 w-px h-8 bg-white/10 pointer-events-none" />
+        <span className="mx-2 sm:mx-3 w-px h-6 sm:h-8 bg-white/10 pointer-events-none" />
 
         {/* Submit Button */}
         <button
           type="submit"
           disabled={isLoading || !searchTerm.trim()}
-          className="relative flex items-center justify-center bg-white/5 border border-white/10 rounded-4xl text-white/70 p-4 ml-1 mr-2 transition-all duration-300 overflow-hidden hover:bg-white/10 hover:border-white/20 hover:text-white active:scale-95 pointer-events-auto cursor-pointer group disabled:opacity-50 disabled:cursor-not-allowed"
+          className="relative flex items-center justify-center bg-white/5 border border-white/10 rounded-4xl text-white/70 p-3 sm:p-4 ml-1 mr-1 sm:mr-2 transition-all duration-300 overflow-hidden hover:bg-white/10 hover:border-white/20 hover:text-white active:scale-95 pointer-events-auto cursor-pointer group disabled:opacity-50 disabled:cursor-not-allowed"
           style={{ "--stroke-width": "2" }}
           onMouseEnter={(e) =>
             !isLoading &&
@@ -165,7 +165,7 @@ const SearchBar = ({
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            className="w-5 h-5 transition-all duration-300 pointer-events-none"
+            className="w-4 h-4 sm:w-5 sm:h-5 transition-all duration-300 pointer-events-none"
             style={{ strokeWidth: "var(--stroke-width)" }}
           >
             <line x1="5" y1="12" x2="19" y2="12" />

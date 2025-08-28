@@ -89,23 +89,23 @@ function App() {
         />
 
         {/* Header Section */}
-        <div className="absolute top-50 left-0 right-0 flex flex-col items-center pt-16 pb-8 ">
+        <div className="absolute top-50 left-0 right-0 flex flex-col items-center pt-8 sm:pt-16 pb-6 sm:pb-8 px-4">
           <TextType
             text={["Gaming Portfolio", "developed by", "BisaCool"]}
             typingSpeed={75}
             pauseDuration={1500}
             showCursor={true}
             cursorCharacter="_"
-            className="font-figtree text-6xl font-bold text-white mb-4 text-center tracking-tight"
+            className="font-figtree text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3 sm:mb-4 text-center tracking-tight"
           />
-          <p className="font-figtree font-light text-lg text-white/70 text-center max-w-2xl px-4 tracking-tight leading-relaxed">
+          <p className="font-figtree font-light text-sm sm:text-base md:text-lg text-white/70 text-center max-w-sm sm:max-w-md md:max-w-2xl px-4 tracking-tight leading-relaxed">
             Discover elite gamers, their achievements, and the incredible
             journeys that shaped their gaming careers.
           </p>
         </div>
 
         {/* Search Bar */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none px-4">
           <SearchBar
             onSearch={handleSearch}
             availablePlayers={playerNames}
