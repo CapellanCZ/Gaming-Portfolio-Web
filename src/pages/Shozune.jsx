@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Eye, EyeOff, Sword, Shield, Target, Trophy, Users, Calendar, MapPin, Star, Clock, Gamepad2, Heart } from 'lucide-react';
+import profileImage from '../assets/profile.png';
 
 // Smooth Cursor Component
 const SmoothCursor = () => {
@@ -158,7 +159,7 @@ const ProfileHeader = ({
   title, 
   location, 
   gamingSince, 
-  avatar, 
+  avatarSrc, // Changed from avatar
   isOnline = true,
   totalStats,
   favoriteGenres 
@@ -167,8 +168,12 @@ const ProfileHeader = ({
     {/* Avatar and Basic Info */}
     <div className="flex flex-col items-center lg:items-start">
       <div className="relative mb-4">
-        <div className="w-32 h-32 rounded-full bg-gradient-to-r from-red-900 to-black border-4 border-red-500/50 flex items-center justify-center shadow-2xl">
-          <div className="text-6xl">{avatar}</div>
+        <div className="w-32 h-32 rounded-full bg-gradient-to-r from-red-900 to-black border-4 border-red-500/50 flex items-center justify-center shadow-2xl overflow-hidden"> {/* Added overflow-hidden */}
+          {avatarSrc ? (
+            <img src={avatarSrc} alt="Profile Avatar" className="w-full h-full object-cover" />
+          ) : (
+            <div className="text-6xl">🥷</div> // Fallback if no image is provided
+          )}
         </div>
         {isOnline && (
           <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-green-500 rounded-full border-4 border-black flex items-center justify-center">
@@ -285,7 +290,7 @@ const NinjaGamingProfile = ({
     title: "Professional Gamer",
     location: "Cavite, Philippines",
     gamingSince: "2007",
-    avatar: "🥷",
+    avatar: "🥷", // This can be removed or kept as a fallback if avatarSrc is not provided
     isOnline: true,
     description: "Once who was a noob in gaming, now a pro. Shozune is a dedicated gamer with over 12 years of experience in competitive gaming. Known for his strategic mind and quick reflexes, he has made a name for himself in the esports community. When he's not gaming, Shozune enjoys streaming his gameplay and sharing tips with his followers.",
     favoriteGenres: ['Action RPG', 'Tactical Shooter', 'Adventure', 'Strategy', 'Indie', 'Roguelike', 'MMORPG','Action'],
@@ -351,11 +356,14 @@ const NinjaGamingProfile = ({
       <NinjaBackground />
       
       {/* Header */}
-      <div className={`relative z-10 transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+  <div className={`relative z-10 transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
         <div className="container mx-auto px-6 pt-12">
           {/* Profile Header */}
-          <ProfileHeader {...profileData} totalStats={totalStats} />
-
+          <ProfileHeader 
+            {...profileData} 
+            totalStats={totalStats} 
+            avatarSrc={profileImage} // Pass the imported image here
+          />  
           {/* Navigation Tabs */}
           <div className="flex gap-1 mb-8 bg-black/30 backdrop-blur-sm rounded-lg p-1 border border-gray-800/50">
             {['overview', 'games', 'achievements', 'friends'].map((tab) => (
