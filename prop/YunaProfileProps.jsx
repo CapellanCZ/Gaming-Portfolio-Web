@@ -92,7 +92,7 @@ const YunaProfileProps = {
   steam: {
     status: 'Online',
     level: 47,
-    games: 8,
+    games: 9,
     hours: '2.1k',
     profile: 'Steam Profile',
   },
